@@ -4,6 +4,8 @@
 
 A modern software project built with cutting-edge technologies.
 
+![Zaika](./logos/Screenshot.png)
+
 ## ✨ Features
 
 🌐 Modern web application with responsive design
@@ -136,4 +138,5 @@ This project is open source. Please check the repository for license information
 ---
 
 ⭐️ If you found this project helpful, please give it a star!
+
 
