@@ -95,16 +95,14 @@ const appRouter = createHashRouter([
       {
         path: "grocery",
         element: (
-          <PrivateRoute>
-            <Suspense fallback={<h1>Loading...</h1>}>
-              <Grocery />
-            </Suspense>
-          </PrivateRoute>
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <Grocery />
+          </Suspense>
         ),
       },
       {
         path: "cart",
-        element: <PrivateRoute><Cart /></PrivateRoute>,
+        element: <Cart />,
       },
     ],
     errorElement: <Error />,

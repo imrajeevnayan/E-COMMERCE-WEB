@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import Lottie from "lottie-react";
+import lottieLoading from "../assets/animations/lottie-loading.json";
 import LocationContext from "../utils/LocationContext";
 import CityContext from "../utils/CityContext";
 
@@ -45,14 +47,18 @@ const Header = () => {
   return (
     <>
       <div className="header">
-        <div className="logo-container">
+        <div className="logo-container" style={{ position: "relative" }}>
           <Link to={"/"}>
             <img
               alt="logo"
               className="logo"
               src={require("../../logos/logo.png")}
+              style={{ zIndex: 2, position: "relative" }}
             />
           </Link>
+          <div style={{ position: "absolute", top: 0, left: 0, width: 60, height: 60, zIndex: 1 }}>
+            <Lottie animationData={lottieLoading} loop={true} style={{ width: 60, height: 60 }} />
+          </div>
           {nearMe ? (
             <div
               onClick={() => {
