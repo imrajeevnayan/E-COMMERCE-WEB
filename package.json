@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "Food ordering app",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html",
-    "test": "jest"
-  },
+  "start": "parcel index.html",
+  "build": "parcel build index.html",
+  "test": "jest",
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d dist"
+},
+
   "author": "Rajeev Nayan",
   "license": "ISC",
   "devDependencies": {
@@ -26,6 +29,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.0",
+    "gh-pages": "^6.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
