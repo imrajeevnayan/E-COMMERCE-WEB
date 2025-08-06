@@ -7,7 +7,7 @@
     "build": "parcel build index.html",
     "test": "jest"
   },
-  "author": "Rithik Jain",
+  "author": "Rajeev Nayan",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.23.9",
