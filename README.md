@@ -1,17 +1,30 @@
-# E-COMMERCE-WEB
+# Zaika - The Swaad of India 🍽️
 
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![GitHub stars](https://img.shields.io/github/stars/imrajeevnayan/E-COMMERCE-WEB?style=for-the-badge) ![GitHub forks](https://img.shields.io/github/forks/imrajeevnayan/E-COMMERCE-WEB?style=for-the-badge)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase) ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white) ![GitHub stars](https://img.shields.io/github/stars/imrajeevnayan/E-COMMERCE-WEB?style=for-the-badge) ![GitHub forks](https://img.shields.io/github/forks/imrajeevnayan/E-COMMERCE-WEB?style=for-the-badge)
 
-A modern software project built with cutting-edge technologies.
+Zaika is a modern food delivery platform that brings the authentic taste of India right to your doorstep. Built with React and powered by Firebase, it offers a seamless food ordering experience with real-time updates and secure authentication.
 
 ![Zaika](./logos/Screenshot.png)
 
 ## ✨ Features
 
-🌐 Modern web application with responsive design
-⚡ Fast and optimized performance
-🎨 Beautiful and intuitive user interface
-⚛️ Built with React for component-based architecture
+### Core Features
+- 🔐 Secure Authentication with Email and Google Sign-in
+- 🍽️ Real-time Restaurant Menu Updates
+- 🛒 Smart Cart Management with Redux
+- 📍 Location-based Restaurant Discovery
+- 💳 Seamless Checkout Process
+- 🎨 Responsive Design for All Devices
+
+### Technical Highlights
+- ⚡ Optimized Performance with React
+- 🔥 Real-time Updates with Firebase
+- 🔄 State Management with Redux
+- 🎯 Custom Hooks for Business Logic
+- 🌐 Location-based Services
+- 🎨 Modern UI with CSS3 Animations
+- 🔍 Smart Search and Filtering
+- 📱 Progressive Web App (PWA) Support
 
 ## 🚀 Quick Start
 
@@ -19,6 +32,7 @@ A modern software project built with cutting-edge technologies.
 
 - Node.js (version 16 or higher)
 - npm or yarn package manager
+- Firebase account and project setup
 - Git for version control
 
 ### Installation
@@ -28,29 +42,45 @@ A modern software project built with cutting-edge technologies.
 git clone https://github.com/imrajeevnayan/E-COMMERCE-WEB.git
 
 # Navigate to the project directory
-cd e-commerce-web
+cd ziaka
 
 # Install dependencies
 npm install
 
-# Or using yarn
-yarn install
-```
+# Set up environment variables
+# Create a .env file in the root directory and add your Firebase config:
+REACT_APP_FIREBASE_API_KEY=your_api_key
+REACT_APP_FIREBASE_AUTH_DOMAIN=your_auth_domain
+REACT_APP_FIREBASE_PROJECT_ID=your_project_id
+REACT_APP_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+REACT_APP_FIREBASE_APP_ID=your_app_id
 
-### Usage
+### Development
 
 ```bash
 # Start the development server
-parcel index.html
+npm start
+
+# Run tests
+npm test
 
 # Build for production
-parcel build index.html
+npm run build
 
-# Start production server
-parcel index.html
+# Deploy to Firebase
+npm run deploy
 ```
 
-Visit `http://localhost:3000` to view the application.
+The development server will start at `http://localhost:1234`
+
+### Environment Setup
+
+1. Create a Firebase project at [Firebase Console](https://console.firebase.google.com/)
+2. Enable Authentication (Email/Password and Google Sign-in)
+3. Set up Firestore Database
+4. Add your Firebase configuration to `.env` file
+5. Enable required APIs in Google Cloud Console for location services
 
 
 
@@ -58,30 +88,89 @@ Visit `http://localhost:3000` to view the application.
 
 | Script | Description |
 |--------|-------------|
-| `npm run start` | Start the production server |
-| `npm run build` | Build the project for production |
-| `npm run test` | Run the test suite |
+| `npm start` | Starts the development server |
+| `npm test` | Runs the test suite |
+| `npm run build` | Builds the app for production |
+| `npm run deploy` | Deploys the app to Firebase Hosting |
+| `npm run lint` | Runs ESLint for code quality |
+| `npm run format` | Formats code with Prettier |
 
 
 
 ## 📁 Project Structure
 
 ```
-E-COMMERCE-WEB/
+ziaka/
 ├── README.md
 ├── package.json
+├── index.html
 ├── src/
-│   ├── index.js
-│   └── components/
-├── public/
-└── dist/
+│   ├── App.jsx                 # Main application component
+│   ├── components/             # React components
+│   │   ├── About.jsx          # About page
+│   │   ├── Body.jsx           # Main content
+│   │   ├── Cart.jsx           # Shopping cart
+│   │   ├── Header.jsx         # Navigation header
+│   │   ├── Login.jsx          # Authentication
+│   │   ├── RestaurantMenu.jsx # Restaurant details
+│   │   └── ...
+│   └── utils/                 # Utility functions and configurations
+│       ├── firebase.js        # Firebase configuration
+│       ├── AuthContext.js     # Authentication context
+│       ├── cartSlice.js       # Redux cart slice
+│       └── ...
+├── logos/                     # Image assets
+└── public/                    # Static files
 ```
 
-## 🛠️ Built With
+## 🛠️ Tech Stack
 
-- **JavaScript** - Primary programming language
-- **React** - Application framework
-- **react** - UI library
+### Frontend
+- **React** - UI Framework
+- **Redux Toolkit** - State Management
+- **React Router** - Navigation
+- **CSS3** - Styling and Animations
+- **Lottie React** - Animations
+
+### Backend & Services
+- **Firebase Authentication** - User Management
+- **Firebase Firestore** - Data Storage
+- **Firebase Hosting** - Deployment
+
+### Tools & Utilities
+- **Parcel** - Build Tool
+- **Jest** - Testing Framework
+- **ESLint** - Code Quality
+- **Git** - Version Control
+
+## 🌟 Key Features In Detail
+
+### User Experience
+- Seamless authentication with email/password and Google sign-in
+- Real-time order tracking and updates
+- Intelligent search with filters for cuisine, rating, and price range
+- Smart cart management with persistent storage
+- Location-based restaurant discovery
+- Responsive design for all device sizes
+
+### Restaurant Partners
+- Detailed restaurant profiles
+- Real-time menu management
+- Order management system
+- Analytics and insights
+- Customer feedback system
+
+## 🗺️ Roadmap
+
+### Upcoming Features
+- [ ] Online payment integration
+- [ ] Restaurant partner dashboard
+- [ ] Customer loyalty program
+- [ ] Advanced order tracking
+- [ ] AI-powered restaurant recommendations
+- [ ] Multi-language support
+- [ ] Dark mode support
+- [ ] Performance optimizations
 
 ## 🤝 Contributing
 
@@ -97,6 +186,17 @@ We welcome contributions! Here's how you can help:
 6. Commit your changes (`git commit -m 'Add some amazing feature'`)
 7. Push to the branch (`git push origin feature/amazing-feature`)
 8. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👏 Acknowledgments
+
+- Design inspiration from leading food delivery platforms
+- Icons from Font Awesome
+- Animations from Lottie
+- All our contributors and supporters
 
 ### Code Style
 
