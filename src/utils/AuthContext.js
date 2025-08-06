@@ -45,7 +45,25 @@ export const AuthProvider = ({ children }) => {
   const signInWithGoogle = async () => {
     try {
       setLoading(true);
-      const result = await signInWithPopup(auth, googleProvider);
+      // Clear any previous error states
+      localStorage.removeItem('auth_error');
+      
+      // Try to sign in with popup
+      const result = await signInWithPopup(auth, googleProvider).catch((error) => {
+        console.error("Popup error:", error);
+        throw new Error(
+          error.code === 'auth/popup-blocked' 
+            ? 'Please allow popups for this site to sign in with Google'
+            : error.code === 'auth/popup-closed-by-user'
+            ? 'Sign-in was cancelled. Please try again.'
+            : 'Failed to sign in with Google. Please try again.'
+        );
+      });
+
+      if (!result?.user) {
+        throw new Error('No user data received from Google');
+      }
+
       const userData = {
         uid: result.user.uid,
         email: result.user.email,

@@ -18,17 +18,31 @@ const Login = () => {
   const handleGoogleSignIn = async () => {
     try {
       setError("");
+      setShowSuccess(false);
+      
+      // Disable the button or show loading state
       const result = await signInWithGoogle();
+      
       if (result) {
-        navigate("/", { replace: true });
+        setShowSuccess(true);
+        // Small delay to show success state
+        setTimeout(() => {
+          navigate("/", { replace: true });
+        }, 1000);
       }
     } catch (error) {
       console.error("Google Sign-in Error:", error);
       setError(error.message || "Failed to sign in with Google");
-      // Clear error after 5 seconds
+      
+      // If it's a popup error, give more specific instructions
+      if (error.message.includes('popup')) {
+        setError(error.message + "\nPlease check your popup blocker settings and try again.");
+      }
+      
+      // Clear error after 7 seconds
       setTimeout(() => {
         setError("");
-      }, 5000);
+      }, 7000);
     }
   };
 
