@@ -14,9 +14,6 @@ import Cart from "./components/Cart";
 import { Toaster } from "react-hot-toast";
 import LocationContext from "./utils/LocationContext";
 import CityContext from "./utils/CityContext";
-import { AuthProvider } from "./utils/AuthContext";
-import Login from "./components/Login";
-import PrivateRoute from "./components/PrivateRoute";
 // import Grocery from "./components/Grocery";
 
 const Grocery = lazy(() => import("./components/Grocery"));
@@ -49,7 +46,6 @@ const AppLayout = () => {
 
   return (
     <Provider store={appStore}>
-      <AuthProvider>
         <div className="app">
           <LocationContext.Provider
             value={{ location: location, setLocation: setLocation }}
@@ -71,7 +67,6 @@ const AppLayout = () => {
             </CityContext.Provider>
           </LocationContext.Provider>
         </div>
-      </AuthProvider>
     </Provider>
   );
 };
@@ -83,23 +78,19 @@ const appRouter = createHashRouter([
     children: [
       {
         path: "",
-        element: <PrivateRoute><Body /></PrivateRoute>,
-      },
-      {
-        path: "login",
-        element: <Login />,
+        element: <Body />,
       },
       {
         path: "about",
-        element: <PrivateRoute><About /></PrivateRoute>,
+        element: <About />,
       },
       {
         path: "contact",
-        element: <PrivateRoute><Contact /></PrivateRoute>,
+        element: <Contact />,
       },
       {
         path: "restaurants/:resId",
-        element: <PrivateRoute><RestaurantMenu /></PrivateRoute>,
+        element: <RestaurantMenu />,
       },
       {
         path: "grocery",
