@@ -2,7 +2,7 @@ import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { createHashRouter, RouterProvider, Outlet, Navigate } from "react-router-dom";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
@@ -14,6 +14,9 @@ import Cart from "./components/Cart";
 import { Toaster } from "react-hot-toast";
 import LocationContext from "./utils/LocationContext";
 import CityContext from "./utils/CityContext";
+import { AuthProvider } from "./utils/AuthContext";
+import Login from "./components/Login";
+import PrivateRoute from "./components/PrivateRoute";
 // import Grocery from "./components/Grocery";
 
 const Grocery = lazy(() => import("./components/Grocery"));
@@ -46,63 +49,71 @@ const AppLayout = () => {
 
   return (
     <Provider store={appStore}>
-      <div className="app">
-        <LocationContext.Provider
-          value={{ location: location, setLocation: setLocation }}
-        >
-          <CityContext.Provider value={{ city: city, setCity: setCity }}>
-            <Toaster
-              position="top-center"
-              reverseOrder={false}
-              gutter={30}
-              containerClassName="notification-container"
-              toastOptions={{
-                className: "notification-toast",
-                duration: 1500,
-              }}
-            />
-            <Header />
-            <Outlet />
-            <Footer />
-          </CityContext.Provider>
-        </LocationContext.Provider>
-      </div>
+      <AuthProvider>
+        <div className="app">
+          <LocationContext.Provider
+            value={{ location: location, setLocation: setLocation }}
+          >
+            <CityContext.Provider value={{ city: city, setCity: setCity }}>
+              <Toaster
+                position="top-center"
+                reverseOrder={false}
+                gutter={30}
+                containerClassName="notification-container"
+                toastOptions={{
+                  className: "notification-toast",
+                  duration: 1500,
+                }}
+              />
+              <Header />
+              <Outlet />
+              <Footer />
+            </CityContext.Provider>
+          </LocationContext.Provider>
+        </div>
+      </AuthProvider>
     </Provider>
   );
 };
 
-const appRouter = createBrowserRouter([
+const appRouter = createHashRouter([
   {
-    path: "/",
+    path: "",
     element: <AppLayout />,
     children: [
       {
-        path: "/",
-        element: <Body />,
+        path: "",
+        element: <PrivateRoute><Body /></PrivateRoute>,
       },
       {
-        path: "/about",
-        element: <About />,
+        path: "login",
+        element: <Login />,
       },
       {
-        path: "/contact",
-        element: <Contact />,
+        path: "about",
+        element: <PrivateRoute><About /></PrivateRoute>,
       },
       {
-        path: "/restaurants/:resId",
-        element: <RestaurantMenu />,
+        path: "contact",
+        element: <PrivateRoute><Contact /></PrivateRoute>,
       },
       {
-        path: "/grocery",
+        path: "restaurants/:resId",
+        element: <PrivateRoute><RestaurantMenu /></PrivateRoute>,
+      },
+      {
+        path: "grocery",
         element: (
-          <Suspense fallback={<h1>Loading...</h1>}>
-            <Grocery />
-          </Suspense>
+          <PrivateRoute>
+            <Suspense fallback={<h1>Loading...</h1>}>
+              <Grocery />
+            </Suspense>
+          </PrivateRoute>
         ),
       },
       {
-        path: "/cart",
-        element: <Cart />,
+        path: "cart",
+        element: <PrivateRoute><Cart /></PrivateRoute>,
       },
     ],
     errorElement: <Error />,

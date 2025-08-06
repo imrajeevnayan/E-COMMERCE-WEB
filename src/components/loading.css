@@ -1,0 +1,35 @@
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: rgba(255, 255, 255, 0.95);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.loading-animation {
+  margin-bottom: 20px;
+}
+
+.loading-text {
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: 500;
+  margin-top: 10px;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.loading-container {
+  animation: fadeIn 0.3s ease-in-out;
+}

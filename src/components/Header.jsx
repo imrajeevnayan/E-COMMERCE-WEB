@@ -1,19 +1,20 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import LocationContext from "../utils/LocationContext";
 import CityContext from "../utils/CityContext";
+import { useAuth } from "../utils/AuthContext";
 
 const Header = () => {
-  const [btnName, setBtnName] = useState("Login");
   const [showNavItems, setShowNavItems] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
-  const onlineStatus = useOnlineStatus();
   const [nearMe, setNearMe] = useState(false);
+  const onlineStatus = useOnlineStatus();
   const { setLocation } = useContext(LocationContext);
   const { city } = useContext(CityContext);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const cartItems = useSelector((store) => store.cart.items);
 
@@ -119,17 +120,24 @@ const Header = () => {
             </li>
 
             <div
-              onClick={() => {
-                btnName === "Login"
-                  ? (setBtnName("Logout"), toast.success("User Logged In"))
-                  : (setBtnName("Login"), toast.success("User Logged Out"));
+              onClick={async () => {
+                if (user) {
+                  try {
+                    await logout();
+                    toast.success("Logged out successfully");
+                  } catch (error) {
+                    toast.error("Error logging out");
+                  }
+                } else {
+                  navigate("/login");
+                }
               }}
               className="login"
             >
               <span>
                 <i className="fa-solid fa-user"></i>
               </span>
-              {btnName}
+              {user ? "Logout" : "Login"}
             </div>
             <li className="h-online">
               Online Status: {onlineStatus ? "🟢" : "🔴"}
